@@ -5,10 +5,12 @@
             <img src="/avatar.png" height="200px" width="200px" class="rounded-img">
       </div>
       <div class="col-sm-12">
-        <h3 style="font-weight: bold;"><%= params[:id] %></h3>
+        <h3 style="font-weight: bold;"><%=  User.find_by_username(params[:id]).fullname %></h3>
         <p>
-          Full-Length Project-Based Tutorials on Engineering, Business & Design. Also on YouTube <a href="http://www.youtube.com/devfactor">http://www.youtube.com/devfactor</a>
+          <b>About Me</b><br>
+          <%=  User.find_by_username(params[:id]).desc %>
         </p>
+        <i class="fa fa-calendar" aria-hidden="true"></i> <%= "Joined "+current_user.created_at.strftime("%B %d, %Y") %>
       </div>
     </div>
     
@@ -57,7 +59,7 @@
           <div class="panel-body">
              <h5 style="color: grey; font-size: 125%;">Who to follow</h5>
              <% for @u in @toFollow do %>
-               <p style="font-weight: bold; opacity: 0.85;" ><a href="/user/<%= @u.username %>"><%= @u.username %></a></p>
+               <p style="font-weight: bold; opacity: 0.85;" ><a href="/user/<%= @u.username %>"><%= @u.fullname %></a></p>
              <% end %>
           </div>
         </div>

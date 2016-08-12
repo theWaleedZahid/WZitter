@@ -66,7 +66,7 @@
           <div class="panel-body">
              <h5 style="color: grey; font-size: 125%;">Who to follow</h5>
              <% for @u in @toFollow do %>
-               <p style="font-weight: bold; opacity: 0.85;" ><a href="/user/<%= @u.username %>"><%= @u.username %></a></p>
+               <p style="font-weight: bold; opacity: 0.85;" ><a href="/user/<%= @u.username %>"><%= @u.fullname %></a></p>
              <% end %>
           </div>
         </div>

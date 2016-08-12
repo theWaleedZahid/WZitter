@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'devise'
 gem 'tzinfo-data'
+gem 'font-awesome-rails'
 group :development, :test do
   gem 'byebug'
 end
