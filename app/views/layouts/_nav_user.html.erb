@@ -11,7 +11,7 @@
       </button>
     </div>
     
-    <img class="navbar-brand" src="/icon.png">
+    <a href="/"><img class="navbar-brand" src="/icon.png"></a>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
@@ -24,7 +24,7 @@
         <li>
           <form class="navbar-form navbar-right" role="search">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search WZitter">
+              <%= text_field_tag :search, params[:search], placeholder: "Search Posts", :class => "form-control"%>
             </div>
           </form>
         </li>

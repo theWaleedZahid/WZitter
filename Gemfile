@@ -13,6 +13,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'devise'
 gem 'tzinfo-data'
 gem 'font-awesome-rails'
+gem 'acts_as_votable', '~> 0.10.0'
 group :development, :test do
   gem 'byebug'
 end

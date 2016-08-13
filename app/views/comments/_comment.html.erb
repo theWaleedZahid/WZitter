@@ -1,0 +1,17 @@
+<% if @post.comments.count > 0 %>
+<div class="col-sm-1">
+    <div>
+        <img src="/avatar.png" width="40px" height="40px">
+    </div>
+</div>
+<div class="col-sm-5">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong><%= comment.name %></strong><span class="text-muted"> <% if comment.email = current_user.email %><%= link_to "Delete", [comment.post, comment], method: :delete, data: { confirm: 'Are you sure?' } %> <% end %></span>
+        </div>
+            <div class="panel-body">
+            <%= comment.body %>
+            </div><!-- /panel-body -->
+        </div><!-- /panel panel-default -->
+    </div><!-- /col-sm-5 -->
+<% end %>

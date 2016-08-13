@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
     
-    
     def new 
         @post = Post.new
     end
@@ -16,7 +15,20 @@ class PostsController < ApplicationController
             end
         end
     end
-    
+    def show
+        @post = Post.find(params[:id])
+    end
+    def upvote
+    @post = Post.find(params[:id])
+    @post.liked_by current_user
+    redirect_to "/user/" +  current_user.username
+    end
+
+    def downvote
+    @post = Post.find(params[:id])
+    @post.downvote_from current_user
+    redirect_to redirect_to "/user/" +  current_user.username
+    end
     
     private
     def post_params # allows certain data to be passed via form.

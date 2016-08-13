@@ -6,7 +6,12 @@ Rails.application.routes.draw do
     end
   end
   resources :relationships, only: [:create, :destroy]
-  resources :posts
+  resources :posts do
+    resources :comments
+    member do
+      put "like", to: "posts#upvote"
+    end
+  end
   # Define Root URL
   root 'pages#index'
   
@@ -14,4 +19,6 @@ Rails.application.routes.draw do
   get '/home' => 'pages#home' # override default routes.
   get '/user/:id' => 'pages#profile'
   get '/explore' => 'pages#explore'
+  get '/posts/:id' => 'posts#show'
+  get '/wzeets' => 'pages#posts'
 end
