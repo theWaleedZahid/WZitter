@@ -40,6 +40,7 @@
             
             <div class="col-sm-1">
               <img src="/avatar.png" class="rounded-img" height="50px" width="50px"></img>
+              <%= image_tag User.find_by_username(params[:id]).avatar.url(:side), :class => "rounded-img" %>
             </div>
             <div class="col-sm-11">
               <p class="post-title"><span class="post-owner"><a href="/user/<%= User.find(@post.user_id).username %>"><%= User.find(@post.user_id).fullname %></a></span> <span class="post-creation">- <%= @post.created_at.to_formatted_s(:short) %></span></p>

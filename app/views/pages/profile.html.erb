@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-xs-3">
       <div class="col-sm-12" style="margin-top: -200px;">
-            <img src="/avatar.png" height="200px" width="200px" class="rounded-img">
+            <%= image_tag User.find_by_username(params[:id]).avatar.url(:profile), :class => "rounded-img" %>
       </div>
       <div class="col-sm-12">
         <h3 style="font-weight: bold;"><%=  User.find_by_username(params[:id]).fullname %></h3>
@@ -22,7 +22,7 @@
           <div class="panel-body row">
             
             <div class="col-sm-1">
-              <img src="/avatar.png" class="rounded-img" height="50px" width="50px"></img>
+              <%= image_tag User.find_by_username(params[:id]).avatar.url(:side), :class => "rounded-img" %>
             </div>
             <div class="col-sm-11">
               <p class="post-title"><span class="post-owner"><a href="/user/<%= User.find(@p.user_id).username %>"><%= User.find(@p.user_id).fullname %></a></span> <span class="post-creation">- <%= @p.created_at.to_formatted_s(:short) %></span></p>

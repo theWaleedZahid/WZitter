@@ -19,6 +19,14 @@
     <%= f.text_area :desc, class: "form-control" %>
   </div>
   <div class="field">
+    Profile Picture <br>
+    <%= f.file_field :avatar %>
+  </div>
+  <div class="field">
+    Profile Cover<br>
+    <%= f.file_field :cover %>
+  </div>
+  <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
   </div>

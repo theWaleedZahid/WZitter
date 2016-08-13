@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160812103507) do
+ActiveRecord::Schema.define(version: 20160813090905) do
 
   create_table "comments", force: :cascade do |t|
     t.string   "name"
@@ -61,6 +61,14 @@ ActiveRecord::Schema.define(version: 20160812103507) do
     t.string   "username"
     t.string   "fullname"
     t.string   "desc"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "cover_file_name"
+    t.string   "cover_content_type"
+    t.integer  "cover_file_size"
+    t.datetime "cover_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

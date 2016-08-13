@@ -13,7 +13,10 @@ class User < ActiveRecord::Base
          
          has_many :comments, dependent: :destroy
          # helper methods
-         
+         has_attached_file :avatar, styles: { profile: "200x200>", side: "50x50>" , nav: "25x25>", thumb: "35x35>" }, default_url: "/avatar.png"
+         validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+         has_attached_file :cover, styles: { main: "100%x500>", side: "261x145>" }, default_url: "/banner.jpg"
+         validates_attachment_content_type :cover, content_type: /\Aimage\/.*\Z/
          # follow another user
          def follow(other)
            active_relationships.create(followed_id: other.id)
