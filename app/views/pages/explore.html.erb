@@ -14,28 +14,22 @@
         <div class="panel panel-default">
           <div class="panel-body">
              <h5 style="color: grey; font-size: 125%;">Trends</h5>
-              <a href="">#Trend #1</a><br>
-                <span style="color: grey;">31k Posts</span><br><br>
-              <a href="">#Trend #2</a><br>
-                <span style="color: grey;">25k Posts</span><br><br>
-              <a href="">#Trend #3</a><br>
-                <span style="color: grey;">16k Posts</span><br><br>
           </div>
         </div>
     </div>
     <div class="col-xs-6">
-        <%= render '/components/post_form' %><% if user_signed_in? %> <br> <% end %> <br>
+        <% if user_signed_in? %><%= render '/components/post_form' %> <% end %> <br>
         
         <% for @p in @posts %>
         <div class="panel panel-default post-panel">
           <div class="panel-body row">
             
             <div class="col-sm-1">
-              <img src="/avatar.png" class="rounded-img" height="50px" width="50px"></img>
+              <%= image_tag @p.user.avatar.url(:side), :class => "rounded-img" %>
             </div>
             <div class="col-sm-11">
-              <p class="post-title"><span class="post-owner"><a href="/user/<%= User.find(@p.user_id).username %>"><%= User.find(@p.user_id).username %></a></span> <span class="post-creation">- <%= @p.created_at.to_formatted_s(:short) %></span></p>
-              <p class="post-content"><%= @p.content %></p>
+              <p class="post-title"><span class="post-owner"><a href="/user/<%= User.find(@p.user_id).username %>"><%= User.find(@p.user_id).username %></a></span><span class="username"><b><%= " @"+User.find(@p.user_id).username %></b></span> <span class="post-creation">- <%= @p.created_at.to_formatted_s(:short) %></span></p>
+              <p class="post-content"><%= render_with_hashtags(@p.content) %></p>
             </div>
             
             <div class="col-sm-12">
@@ -43,8 +37,10 @@
                 <span class="glyphicon glyphicon-comment g-links" aria-hidden="true"></span>
                 <span class="glyphicon glyphicon-retweet g-links" aria-hidden="true"></span>
                 <span class="glyphicon glyphicon-heart g-links" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-option-horizontal g-links" aria-hidden="true"></span>
-                <a href="">View conversation</a>
+                <% if @p.user.email == current_user.email %>
+                  <span style="margin-right: 75px;"><%= link_to "", post_path(@p), method: :delete, data: { confirm: 'Are you sure?' }, :class => "fa fa-trash-o" %></span>
+                <% end %>
+                <a href="/wzeet"+@p.id.to_s>View conversation</a>
               </p>
             </div>
             
@@ -66,7 +62,8 @@
           <div class="panel-body">
              <h5 style="color: grey; font-size: 125%;">Who to follow</h5>
              <% for @u in @toFollow do %>
-               <p style="font-weight: bold; opacity: 0.85;" ><a href="/user/<%= @u.username %>"><%= @u.fullname %></a></p>
+               
+               <p style="font-weight: bold; opacity: 0.85;" ><%= image_tag @u.avatar.url(:side) %><a href="/user/<%= @u.username %>"><%= @u.fullname %></a></p>
              <% end %>
           </div>
         </div>

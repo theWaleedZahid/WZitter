@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
 		@post = Post.find(params[:post_id])
 		
 		@comment = @post.comments.create(params[:comment].permit(:name, :body, :email))
+		@post.comments.reject(&:new_record?)
 		redirect_to @post
 	end
 	def destroy

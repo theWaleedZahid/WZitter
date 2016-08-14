@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get '/home' => 'pages#home' # override default routes.
   get '/user/:id' => 'pages#profile'
   get '/explore' => 'pages#explore'
-  get '/posts/:id' => 'posts#show'
+  get '/wzeet/:id' => 'posts#show'
   get '/wzeets' => 'pages#posts'
+  get '/hashtag/:name', to: 'posts#hashtags'
 end

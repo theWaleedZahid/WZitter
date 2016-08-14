@@ -2,6 +2,7 @@
 <%= form_for([@post, @post.comments.build])  do |f| %>
 	<%= f.hidden_field :email, :value => current_user.email %>
 	<%= f.hidden_field :name, :value => current_user.fullname %>
+	<%= f.hidden_field :avatar, :value => current_user.avatar.url(:thumb) %>
 	<%= f.label :body %><br>
 	<%= f.text_area :body, :class => "form-control" %>
 	<%= f.submit class: "btn btn-sm btn-success", style: "margin: 10px;" %>

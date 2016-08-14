@@ -15,8 +15,17 @@ class PostsController < ApplicationController
             end
         end
     end
+    def destroy
+        @post = Post.find(params[:id])
+		@post.destroy
+		redirect_to root_path
+    end
     def show
         @post = Post.find(params[:id])
+    end
+    def hashtags
+        tag = Tag.find_by(name: params[:name])
+        @posts = tag.posts
     end
     def upvote
     @post = Post.find(params[:id])

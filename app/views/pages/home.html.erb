@@ -27,12 +27,6 @@
         <div class="panel panel-default">
           <div class="panel-body">
              <h5 style="color: grey; font-size: 125%;">Trends</h5>
-              <a href="">#Trend #1</a><br>
-                <span style="color: grey;">31k Posts</span><br><br>
-              <a href="">#Trend #2</a><br>
-                <span style="color: grey;">25k Posts</span><br><br>
-              <a href="">#Trend #3</a><br>
-                <span style="color: grey;">16k Posts</span><br><br>
           </div>
         </div>
     </div>
@@ -47,8 +41,8 @@
               <%= image_tag @p.user.avatar.url(:thumb), :class => "rounded-img" %>
             </div>
             <div class="col-sm-11">
-              <p class="post-title"><span class="post-owner"><a href="/user/<%= User.find(@p.user_id).username %>"><%= User.find(@p.user_id).username %></a></span> <span class="post-creation">- <%= @p.created_at.to_formatted_s(:short) %></span></p>
-              <p class="post-content"><%= @p.content %></p>
+              <p class="post-title"><span class="post-owner"><a href="/user/<%= User.find(@p.user_id).username %>"><%= User.find(@p.user_id).fullname %></a></span><span class="username"><b><%= " @"+User.find(@p.user_id).username %></b></span> <span class="post-creation">- <%= @p.created_at.to_formatted_s(:short) %></span></p>
+              <p class="post-content"><%= render_with_hashtags(@p.content) %></p>
             </div>
             
             <div class="col-sm-12">
@@ -56,8 +50,10 @@
                 <span style="margin-right: 75px;"><i class="fa fa-comment" aria-hidden="true" style="bg-color:#337ab7;"><%= @p.comments.count %></i></span>
                 <span class="glyphicon glyphicon-retweet g-links" aria-hidden="true"></span>
                 <span style="margin-right: 75px;"><%= link_to @p.get_upvotes.size, like_post_path(@p), method: :put, :class => "fa fa-heart" %></span>
-                <span class="glyphicon glyphicon-option-horizontal g-links" aria-hidden="true"></span>
-                <a href=<%= "/posts/" +  @p.id.to_s %>>View conversation</a>
+                <% if @p.user.email == current_user.email %>
+                <span style="margin-right: 75px;"><%= link_to "", post_path(@p), method: :delete, data: { confirm: 'Are you sure?' }, :class => "fa fa-trash-o" %></span>
+                <% end %>
+                <a href=<%= "/wzeet/" +  @p.id.to_s %>>View conversation</a>
               </p>
             </div>
             
