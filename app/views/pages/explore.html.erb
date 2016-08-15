@@ -35,8 +35,11 @@
             <div class="col-sm-12">
               <p class="post-links">
                 <span class="glyphicon glyphicon-comment g-links" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-retweet g-links" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-heart g-links" aria-hidden="true"></span>
+                <span style="margin-right: 75px;">
+                  <% if user_signed_in? %>
+                  <%= link_to @p.get_upvotes.size, like_post_path(@p), method: :put, :class => "fa fa-heart" %>
+                  <% end %>
+                  </span>
                 <% if @p.user.email == current_user.email %>
                   <span style="margin-right: 75px;"><%= link_to "", post_path(@p), method: :delete, data: { confirm: 'Are you sure?' }, :class => "fa fa-trash-o" %></span>
                 <% end %>

@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+  include PublicActivity::Model
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
   has_and_belongs_to_many :tags
   acts_as_votable
   has_many :comments, dependent: :destroy

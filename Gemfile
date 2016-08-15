@@ -15,6 +15,7 @@ gem 'tzinfo-data'
 gem 'font-awesome-rails'
 gem 'acts_as_votable', '~> 0.10.0'
 gem "paperclip", "~> 5.0.0"
+gem 'public_activity'
 group :development, :test do
   gem 'byebug'
 end
