@@ -1,6 +1,4 @@
 class Post < ActiveRecord::Base
-  include PublicActivity::Model
-  tracked owner: Proc.new{ |controller, model| controller.current_user }
   has_and_belongs_to_many :tags
   acts_as_votable
   has_many :comments, dependent: :destroy
@@ -8,6 +6,8 @@ class Post < ActiveRecord::Base
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 } # tweets are capped at 140 chars.
   default_scope -> { order(created_at: :desc) } # newest tweets / posts first
+  has_attached_file :image, styles: { medium: "476x476>", thumb: "100x100>" }, dependent: :destroy
+  validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
   
   after_create do
     post = Post.find_by(id: self.id)

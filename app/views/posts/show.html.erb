@@ -36,7 +36,7 @@
             </div>
             <div class="col-sm-11">
               <p class="post-title"><span class="post-owner"><a href="/user/<%= User.find(@post.user_id).username %>"><%= User.find(@post.user_id).fullname %></a></span><span class="username"><b><%= " @"+User.find(@post.user_id).username %></b></span> <span class="post-creation">- <%= @post.created_at.to_formatted_s(:short) %></span></p>
-              <p class="post-content"><%= @post.content %></p>
+              <p class="post-content"><%= @post.content %><br><%= image_tag @post.image.url(:medium) if @post.image.exists? %></p>
             </div>
             
             <div class="col-sm-12">

@@ -29,7 +29,7 @@
             </div>
             <div class="col-sm-11">
               <p class="post-title"><span class="post-owner"><a href="/user/<%= User.find(@p.user_id).username %>"><%= User.find(@p.user_id).fullname %></a></span><span class="username"><b><%= " @"+User.find(@p.user_id).username %></b></span> <span class="post-creation">- <%= @p.created_at.to_formatted_s(:short) %></span></p>
-              <p class="post-content"><%= render_with_hashtags(@p.content) %></p>
+              <p class="post-content"><%= render_with_hashtags(@p.content) %><br><%= image_tag @p.image.url(:medium) if @p.image.exists? %></p>
             </div>
             
             <div class="col-sm-12">
@@ -66,7 +66,7 @@
              <h5 style="color: grey; font-size: 125%;">Who to follow</h5>
              <% for @u in @toFollow do %>
                
-               <p style="font-weight: bold; opacity: 0.85;" ><%= image_tag @u.avatar.url(:side), :class => "rounded-img" %><a href="/user/<%= @u.username %>"><%= @u.fullname %></a></p>
+               <p style="font-weight: bold; opacity: 0.85;" ><%= image_tag @u.avatar.url(:side), :class => "rounded-img" %><a href="/<%= @u.username %>"><%= @u.fullname %></a></p>
              <% end %>
           </div>
         </div>

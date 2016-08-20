@@ -11,8 +11,8 @@
               <div class="field" style="margin-left: 10px;">
                 <%= f.text_field :content, autofocus: true, class: "form-control" %>
                 <span type="button" class="btn btn-submit" style="float: right; margin-top: 3px;"><%= f.submit "Add Post", class: "btn btn-primary" %></span>
-              </div>
-          
+              </div><br>
+        <%= f.file_field :image, :style => "margin-left: 10px;" %>
         <% end %>
       </div>
     </div>
