@@ -9,7 +9,6 @@ class PostsController < ApplicationController
         @post.user_id = current_user.id # assign the post to the user who created it.
         respond_to do |f|
             if (@post.save)
-                track_activity @post
                 f.html { redirect_to "", notice: "Post created!" }
             else
                 f.html { redirect_to "", notice: "Error: Post Not Saved." }
@@ -19,7 +18,6 @@ class PostsController < ApplicationController
     def destroy
         @post = Post.find(params[:id])
 		@post.destroy
-		track_activity @post
 		redirect_to root_path
     end
     def show
