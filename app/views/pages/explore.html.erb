@@ -14,6 +14,13 @@
         <div class="panel panel-default">
           <div class="panel-body">
              <h5 style="color: grey; font-size: 125%;">Trends</h5>
+             <% Tag.first(10).each do |t| %>
+               <% if t.posts.count == 0 %>
+                 <%= t.destroy %>
+               <% end %> 
+               <p><a href="/hashtag/<%= t.name %>">#<%= t.name %></a></p>
+               <p><b><%= number_to_human(t.posts.count , :format => '%n%u', :units => { :thousand => 'K' }) %> Posts</b></p>
+             <% end %> 
           </div>
         </div>
     </div>

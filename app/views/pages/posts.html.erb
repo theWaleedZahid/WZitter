@@ -7,17 +7,19 @@
           </div>
           <div class="panel-footer">
             <div class="row">
-                <div class="col-sm-2"> <%= image_tag current_user.avatar.url(:side), :class => "rounded-img home-avatar" %></div>
+                <div class="col-sm-2">
+                <%= image_tag current_user.avatar.url(:side), :class => "rounded-img home-avatar" %>
+                </div>
                 <div class="col-sm-10"><h4 style="text-align: left;padding-left: 10px;margin-top: 0px;"><%=link_to current_user.fullname, "/user/"+current_user.username %><br>(@<%= current_user.username %>)</h4></div>
                 <div class="col-sm-12" style="margin-top: 10px;">
-                  <div class="col-sm-6" style="font-size: 80%; opacity: 0.7;">WZEETS<br>
-                    <h6 style="color: #0084B4; font-size: 200%;"><%= current_user.posts.count %></h6>
+                  <div class="col-sm-6" style="font-size: 80%; opacity: 0.7;"><%= link_to "WZEETS", "/wzeets", :style => "font-size: 80%; opacity: 0.7;" %><br>
+                    <h6 style="color: #0084B4; font-size: 200%; padding-left: 7px;"><%= number_to_human(current_user.posts.count , :format => '%n%u', :units => { :thousand => 'K' }) %></h6>
                   </div>
                   <div class="col-sm-6" style="font-size: 80%; opacity: 0.7;">FOLLOWERS<br>
-                    <h6 style="color: #0084B4; font-size: 200%;"><%= current_user.followers.count %></h6>
+                    <h6 style="color: #0084B4; font-size: 200%;"><%= number_to_human(current_user.followers.count , :format => '%n%u', :units => { :thousand => 'K' }) %></h6>
                   </div>
                   <div class="col-sm-6" style="font-size: 80%; opacity: 0.7;margin-left:50px;margin-right:50px;">FOLLOWING<br>
-                    <h6 style="color: #0084B4; font-size: 200%;"><%= current_user.following.count %></h6>
+                    <h6 style="color: #0084B4; font-size: 200%;"><%= number_to_human(current_user.following.count , :format => '%n%u', :units => { :thousand => 'K' }) %></h6>
                   </div>
                 </div>
             </div>
@@ -28,12 +30,13 @@
         <div class="panel panel-default">
           <div class="panel-body">
              <h5 style="color: grey; font-size: 125%;">Trends</h5>
-              <a href="">#Trend #1</a><br>
-                <span style="color: grey;">31k Posts</span><br><br>
-              <a href="">#Trend #2</a><br>
-                <span style="color: grey;">25k Posts</span><br><br>
-              <a href="">#Trend #3</a><br>
-                <span style="color: grey;">16k Posts</span><br><br>
+             <% Tag.first(10).each do |t| %>
+               <% if t.posts.count == 0 %>
+                 <%= t.destroy %>
+               <% end %> 
+               <p><a href="/hashtag/<%= t.name %>">#<%= t.name %></a></p>
+               <p><b><%= <%= number_to_human(t.posts.count , :format => '%n%u', :units => { :thousand => 'K' }) %> %> Posts</b></p>
+             <% end %> 
           </div>
         </div>
     </div>

@@ -12,6 +12,7 @@ class PagesController < ApplicationController
     end
     @posts = Post.where("user_id IN (?)", following)
     @newPost = Post.new
+    #@tags = #Tag.to_a.uniq{|t| t.name}
   end
 
   # back-end code for pages/profile
